@@ -6,14 +6,15 @@ import {
 	Link,
 	Text
 } from "@nextui-org/react";
+
 import { FC } from "react";
 
 export const Header: FC = () => {
 	return (
-		<Navbar isBordered>
+		<Navbar>
 			<Navbar.Brand>
 				<NextLink href="/" passHref>
-					<Link css={{ userSelect: 'none' }}>
+				<Link css={{ userSelect: 'none' }}>
 						<Image 
 							src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png"
 							alt="Icono de la App"
