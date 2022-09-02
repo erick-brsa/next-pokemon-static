@@ -1,7 +1,8 @@
 {
-  "name": "pokemon-static",
+  "name": "pokemon-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pokemon-app.erick-briones.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

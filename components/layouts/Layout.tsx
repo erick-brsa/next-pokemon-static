@@ -20,7 +20,6 @@ export const Layout: FC<Props> = ({ children, title }) => {
 				<meta property="og:image" content={`https://pokemon-app.erick-briones.com/img/banner.png`} />
 			</Head>
 
-			{/* Navbar */}
 			<Header />
 
 			<main style={{
