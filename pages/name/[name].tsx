@@ -6,8 +6,8 @@ import { Button, Card, Container, Grid, Image, Text } from "@nextui-org/react";
 import confetti from "canvas-confetti"
 
 import { existInFavorites, getPokemonInfo, toggleFavorite } from "../../utils";
+import { Pokemon, PokemonListResponse } from "../../interfaces";
 import { Layout } from "../../components/layouts";
-import { Pokemon } from "../../interfaces";
 import { pokeApi } from "../../api";
 
 interface Props {
@@ -39,6 +39,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 			}
 		})
 	}
+
 
 	return (
 		<Layout title={`PokemonApp - ${capitalize(pokemon.name)}`}>
@@ -109,20 +110,24 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
-	const arrayPokemon = [...Array(151)].map((_, id) => `${id + 1}`)
+    const { data } = await pokeApi.get<PokemonListResponse>(`/pokemon`);
+
+    const pokemons = data.results;
 
 	return {
-		paths: arrayPokemon.map((id) => ({ params: { id } })),
+        paths: pokemons.map(p => ({
+            params: { name: p.name }
+        })),
 		fallback: false
 	}
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	const { id } = params as { id: string }
+	const { name } = params as { name: string };
 
 	return {
 		props: {
-			pokemon: await getPokemonInfo(id)
+			pokemon: await getPokemonInfo(name)
 		}
 	}
 }
